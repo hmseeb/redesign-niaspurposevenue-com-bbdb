@@ -74,6 +74,9 @@
   var lbImage = document.getElementById('lbImage');
   var lbClose = document.getElementById('lbClose');
   var lastTrigger = null;
+  // 1x1 transparent GIF used as the idle placeholder so the element never
+  // sits in the DOM with an empty/broken source.
+  var LB_PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 
   function openLightbox(src, alt, trigger) {
     if (!lightbox || !lbImage) return;
@@ -88,7 +91,7 @@
   function closeLightbox() {
     if (!lightbox || lightbox.hidden) return;
     lightbox.hidden = true;
-    if (lbImage) lbImage.src = '';
+    if (lbImage) lbImage.src = LB_PLACEHOLDER;
     document.body.style.overflow = '';
     if (lastTrigger) {
       lastTrigger.focus();
